@@ -10,7 +10,7 @@ cd api
 ```
 then use 'docker' to start the api
 ```bash
-docker-composer up
+docker-compose up
 ```
 
 wait for the docker to finish starting up the app then access the api using the following link 'http://localhost:8080/'

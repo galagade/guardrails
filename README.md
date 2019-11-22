@@ -9,7 +9,7 @@ cd guardrail
 
 then use 'docker' to start the app
 ```bash
-docker-composer up
+docker-compose up
 ```
 wait for the docker to finish starting up the app then access the api using the following link 'http://localhost:8080/' as for the dashboard use the following link 'http://localhost:4100/'
 
@@ -22,7 +22,7 @@ cd dashboard
 ```
 then use 'docker' to start the dashboard app
 ```bash
-docker-composer up
+docker-compose up
 ```
 
 wait for the docker to finish starting up the app then access the dashboard using the following link 'http://localhost:4100/'
@@ -35,7 +35,7 @@ cd api
 ```
 then use 'docker' to start the api
 ```bash
-docker-composer up
+docker-compose up
 ```
 
 wait for the docker to finish starting up the app then access the api using the following link 'http://localhost:8080/'

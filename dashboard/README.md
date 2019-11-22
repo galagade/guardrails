@@ -9,7 +9,7 @@ cd dashboard
 ```
 then use 'docker' to start the dashboard app
 ```bash
-docker-composer up
+docker-compose up
 ```
 
 wait for the docker to finish starting up the app then access the dashboard using the following link 'http://localhost:4100/'
