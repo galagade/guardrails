@@ -1,0 +1,59 @@
+version: "3.6"
+
+x-common-variables: &common-variables
+  MYSQL_USER: guardrail
+  MYSQL_PASSWORD: password
+  MYSQL_DATABASE: guardrail
+
+
+services:
+    mysql1:
+        image: mysql/mysql-server:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - "127.0.0.1:3307:3307"
+        command: --init-file /data/application/init.sql
+        volumes:
+            - ./api/docker_db/init.sql:/data/application/init.sql
+        expose:
+            - "3307"
+        networks:
+            - db-network
+    api:
+        container_name: api
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        command: npm start
+        depends_on:
+            - mysql1
+        ports:
+            - "127.0.0.1:8080:8080"
+        expose:
+            - "8080"
+        links:
+            - mysql1
+        environment:
+            <<: *common-variables
+            SQL_HOST: mysql1
+        networks:
+            - db-network
+        volumes:
+            - ./api:/usr/src/app
+    dashboard:
+        container_name: dashboard
+        build:
+            context: ./dashboard
+            dockerfile: Dockerfile
+        command: npm install
+        command: npm start
+        ports:
+          - '4100:4100'
+        volumes:
+            - ./dashboard:/usr/src/app
+
+
+networks:
+    db-network:
+        driver: bridge

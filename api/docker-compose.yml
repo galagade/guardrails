@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+    mysql1:
+        image: mysql/mysql-server:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - "127.0.0.1:3307:3307"
+        command: --init-file /data/application/init.sql
+        volumes:
+            - ./docker_db/init.sql:/data/application/init.sql
+        expose:
+            - "3307"
+        networks:
+            - app-network
+    api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: npm start
+        depends_on:
+            - mysql1
+        ports:
+            - "127.0.0.1:8080:8080"
+        expose:
+            - "8080"
+        links:
+            - mysql1
+        networks:
+            - app-network
+
+
+networks:
+    app-network:
+        driver: bridge

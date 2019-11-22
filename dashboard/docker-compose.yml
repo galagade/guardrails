@@ -1,0 +1,15 @@
+version: '3.6'
+
+services:
+
+  frontend:
+    container_name: frontend
+    command: npm start
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+        - '.:/usr/src/app'
+        - '/usr/src/app/node_modules'
+    ports:
+      - '4100:4100'
