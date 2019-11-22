@@ -1,5 +1,5 @@
 # Guardrail Security Scanning app
-This app contains the challenge for full stack engineer. The app consist of dashboard.
+This app contains the challenge for full stack engineer. This section consist of dashboard app.
 To run the application please make sure you docker installed in your machine
 
 ## Running the application
