@@ -1,10 +1,5 @@
 version: "3.6"
 
-x-common-variables: &common-variables
-  MYSQL_USER: guardrail
-  MYSQL_PASSWORD: password
-  MYSQL_DATABASE: guardrail
-
 
 services:
     mysql1:
@@ -13,9 +8,8 @@ services:
             MYSQL_ROOT_PASSWORD: password
         ports:
             - "127.0.0.1:3307:3307"
-        command: --init-file /data/application/init.sql
         volumes:
-            - ./api/docker_db/init.sql:/data/application/init.sql
+            - ./api/docker_db/init.sql:/docker-entrypoint-initdb.d/init.sql
         expose:
             - "3307"
         networks:
@@ -34,9 +28,6 @@ services:
             - "8080"
         links:
             - mysql1
-        environment:
-            <<: *common-variables
-            SQL_HOST: mysql1
         networks:
             - db-network
         volumes:
